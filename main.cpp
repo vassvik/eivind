@@ -29,7 +29,7 @@ int main() {
      
     glfwMakeContextCurrent(window);
     glfwSwapInterval(1); // Enable vsync
-#ifndef __APPLE
+#ifndef __APPLE__
     if (!gladLoadGLLoader((GLADloadproc)glfwGetProcAddress)) {
         printf("Could not load Opengl functions");
         return 3;
