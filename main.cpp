@@ -30,6 +30,13 @@ int main() {
     glfwMakeContextCurrent(window);
     glfwSwapInterval(1); // Enable vsync
 
+    if (!gladLoadGLLoader((GLADloadproc)glfwGetProcAddress)) {
+        printf("Could not load Opengl functions");
+        return 3;
+    }
+
+    
+
     while (!glfwWindowShouldClose(window)) {
     	glfwPollEvents();
 
