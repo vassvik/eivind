@@ -1,5 +1,11 @@
+#ifndef __APPLE__
 #include <glad/glad.h>
 #include <glad/glad.c>
+#else
+#include <OpenGL/gl3.h>
+#include <OpenGL/gl3ext.h>
+#endif
+
 #include <GLFW/glfw3.h>
 
 #include <stdio.h>
