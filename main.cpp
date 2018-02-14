@@ -35,7 +35,8 @@ int main() {
         return 3;
     }
 
-    
+    GLuint vao;
+    glCreateVertexArrays(1, &vao);
 
     while (!glfwWindowShouldClose(window)) {
     	glfwPollEvents();
