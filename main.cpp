@@ -45,7 +45,7 @@ int main() {
 
     printf("here\n"); fflush(stdout);
     GLuint vao;
-    glCreateVertexArrays(1, &vao);
+    glGenVertexArrays(1, &vao);
     printf("here\n"); fflush(stdout);
 
     while (!glfwWindowShouldClose(window)) {
