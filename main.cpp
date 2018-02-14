@@ -34,6 +34,7 @@ int main() {
         printf("Could not load Opengl functions");
         return 3;
     }
+    printf("asd\n"); fflush(stdout);
 #endif
 
     printf("here\n"); fflush(stdout);
