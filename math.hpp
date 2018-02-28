@@ -17,6 +17,7 @@ struct Vec3f {
     const float& operator[](int rhs) const;
 };
 
+
 Vec3f operator+(Vec3f lhs, Vec3f rhs);
 Vec3f operator-(Vec3f lhs, Vec3f rhs);
 Vec3f operator*(Vec3f lhs, Vec3f rhs);
@@ -50,6 +51,20 @@ Vec3f rotateX(Vec3f v, float angle);
 Vec3f rotateY(Vec3f v, float angle);
 Vec3f rotateZ(Vec3f v, float angle);
 
+////////////////////////////////////////////////////////////////////////////////
+/// Quaternion
+////////////////////////////////////////////////////////////////////////////////
+
+struct Quatf {
+    union {
+        struct { float x, y, z, w; };
+        float xyzw[4];
+    };
+    Quatf();
+    Quatf(float x, float y, float z, float w);
+    float& operator[](int rhs);
+    const float& operator[](int rhs) const;
+};
 
 ////////////////////////////////////////////////////////////////////////////////
 /// 4x4 Matrix
@@ -179,6 +194,27 @@ Vec3f rotateZ(Vec3f v, float angle) {
 Vec3f swizzle(Vec3f u, int a, int b, int c) {
     return Vec3f{u[a], u[b], u[c]};
 }
+
+////////////////////////////////////////////////////////////////////////////////
+/// Quaternion
+////////////////////////////////////////////////////////////////////////////////
+
+Quatf::Quatf() : x(0.0), y(0.0), z(0.0), w(1.0) {
+
+}
+
+Quatf::Quatf(float x, float y, float z, float w) : x(x), y(y), z(z), w(w) {
+
+}
+
+float& Quatf::operator[](int rhs) {
+    return xyzw[rhs];
+}
+
+const float& Quatf::operator[](int rhs) const {
+    return xyzw[rhs];
+}
+
 
 
 ////////////////////////////////////////////////////////////////////////////////

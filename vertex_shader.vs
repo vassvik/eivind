@@ -1,5 +1,10 @@
 #version 330 core
 
+layout(location = 10) in vec3 instancePosition;
+layout(location = 11) in vec4 instanceQuaternion;
+layout(location = 12) in float instanceLength;
+layout(location = 13) in int instanceType;
+
 uniform mat4 MVP;
 
 uniform vec3 r;
@@ -11,9 +16,12 @@ out vec3 pos;
 out vec2 uv;
 out vec3 spos;
 out vec3 normal;
+out float radius;
 flat out int instance;
 
 void main() {
+	radius = 0.5;
+
 	if (draw_mode == 0) {
 		vec2 p = vec2(gl_VertexID%2, gl_VertexID/2);
 		p = 2.0*p - 1.0;
@@ -23,7 +31,7 @@ void main() {
 		} else {
 			spos = vec3(1.0, 0.0, 0.0);
 		}
-		vec3 P = spos + r*p.x + u*p.y;
+		vec3 P = spos + radius*(r*p.x + u*p.y);
 
 		uv = p;
 		instance = gl_InstanceID;

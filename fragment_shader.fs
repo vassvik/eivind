@@ -5,6 +5,7 @@ in vec2 uv;
 in vec3 spos;
 in vec3 pos;
 in vec3 normal;
+in float radius;
 
 uniform vec3 f;
 uniform vec3 r;
@@ -26,23 +27,24 @@ void main() {
 		} else {
 			col = vec3(0.0, 1.0, 0.0);
 		}
-		if (length(uv) < 0.5) {
-			float z = sqrt(0.5*0.5 - dot(uv, uv));
+		if (length(uv) < 1.0) {
+			float z = sqrt(1.0 - dot(uv, uv));
 			vec3 n = normalize(vec3(uv, z));
 
 			float s = dot(vec3(0.0, 0.0, 1.0), n);
 
-			color = vec4(col, 1.0);
+			color = vec4(col, 1.0)*s;
 
-			float d = length((spos + (0.5*r*uv.x + 0.5*u*uv.y - f*z)) - cpos);
+			float d = length((spos + radius*(r*uv.x + u*uv.y - f*z)) - cpos);
 
 			gl_FragDepth = (d - near)/(far - near);
 		} else {
-			discard;
+			//discard;
 		}
 	} else {
-		float s = dot(vec3(1.0, 0.0, 0.0), normal);
-		color = vec4(vec3(0.0, 0.0, 1.0)*0.5 + 0.5 + 0.5*normal, 1.0);
+		float s = clamp(dot(vec3(1.0, 0.0, 0.0), normal), 0.0, 1.0)*0.5 + 0.5;
+		vec3 col = pos.x > 0.0 ? vec3(1.0, 0.0, 0.0) : vec3(0.0, 1.0, 0.0);
+		color = vec4(col*s, 1.0);
 
 		float d = length(pos - cpos);
 

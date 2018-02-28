@@ -154,6 +154,8 @@ int main() {
         glUniform1i(glGetUniformLocation(program, "draw_mode"), 1);
         glDrawArraysInstanced(GL_TRIANGLE_STRIP, 0, 32, 1);
 
+        glDrawArraysInstanced(GL_TRIANGLES, 0, 36, 2);
+
         //
         glfwSwapBuffers(window);
     }
